@@ -1,8 +1,5 @@
 # 🏔️ Web Portal Mapala Arga Dahana UMK
 
-![Status](https://shields.io)
-![PHP](https://shields.io)
-![MySQL](https://shields.io)
 
 Aplikasi web berbasis arsitektur **PHP MVC (Model-View-Controller)** dan **MySQL** untuk sistem informasi, publikasi kegiatan, dan portal anggota organisasi **Mapala Arga Dahana Universitas Muria Kudus**.
 
