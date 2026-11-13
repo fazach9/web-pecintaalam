@@ -1,68 +1,59 @@
-# 🏔️ Web Portal Mapala Arga Dahana UMK
+# MAPALA Arga Dahana — Starter Project
 
-![Status](https://shields.io)
-![PHP](https://shields.io)
-![MySQL](https://shields.io)
+Starter awal untuk Website Resmi dan Management System MAPALA Arga Dahana, Universitas Muria Kudus.
 
-Aplikasi web berbasis arsitektur **PHP MVC (Model-View-Controller)** dan **MySQL** untuk sistem informasi, publikasi kegiatan, dan portal anggota organisasi **Mapala Arga Dahana Universitas Muria Kudus**.
+## Stack
+- PHP Native 8.2+
+- MySQL 8+
+- PDO
+- Bootstrap 5.3
+- Arsitektur MVC sederhana
 
-> ⚠️ **Catatan:** Proyek ini masih dalam tahap pengembangan aktif (*Work in Progress*). Beberapa fitur dan tampilan masih terus disempurnakan.
+## Menjalankan di XAMPP
+1. Ekstrak folder `arga-dahana` ke `htdocs`.
+2. Jalankan Apache dan MySQL.
+3. Buka phpMyAdmin.
+4. Import `database/schema.sql`.
+5. Sesuaikan `config/config.php` dengan URL lokal.
+6. Sesuaikan kredensial database di `config/database.php`.
+7. Buka `http://localhost/arga-dahana/public/`.
 
-## 🚧 Status & Roadmap Pengembangan
-- [x] **Inisialisasi Arsitektur MVC:** Struktur dasar `Router`, `Database`, `Controllers`, dan `Views`.
-- [x] **Konfigurasi Keamanan Dasar:** Pembuatan *security helper* dan struktur autentikasi login.
-- [x] **Skema Database Awal:** Perancangan tabel dasar pada `database/schema.sql`.
-- [x] **Halaman Publik & Error Dasar:** Tampilan beranda (`home.php`), halaman login (`login.php`), dan halaman `404.php`.
-- [ ] **Dashboard Admin & Manajemen Konten:** Pengelolaan berita, artikel ekspedisi, dan dokumentasi kegiatan *(Dalam proses)*.
-- [ ] **Manajemen Data Anggota & Inventaris Alat:** Pendataan keanggotaan dan logistik perlengkapan organisasi *(Rencana berikutnya)*.
-- [ ] **Penyempurnaan UI/UX Responsif:** Optimalisasi tampilan pada perangkat mobile dan desktop *(Rencana berikutnya)*.
+## Catatan penting
+- Ini adalah starter scaffold, bukan aplikasi produksi yang sudah selesai.
+- Login handler sengaja belum diaktifkan. Implementasikan validasi CSRF, `password_verify()`, session regeneration, dan pemeriksaan role sebelum membuat akun admin.
+- Jangan gunakan kredensial default pada server produksi.
+- Matikan debug, gunakan HTTPS, batasi upload, dan letakkan file sensitif di luar web root.
+- Untuk deployment yang lebih aman, arahkan document root web server langsung ke folder `public/`.
+- Ubah `base_url` dan path asset sesuai konfigurasi hosting.
 
-## 🗂️ Struktur Direktori Saat Ini
+## Struktur
 ```text
-arga_dahana_starter/
-├── app/
-│   ├── Controllers/
-│   │   ├── AuthController.php    # Logika autentikasi & login
-│   │   └── HomeController.php    # Logika halaman utama publik
-│   ├── Core/
-│   │   ├── Database.php          # Kelas pengelola koneksi database
-│   │   └── Router.php            # Pengatur rute URL aplikasi
-│   └── Helpers/
-│       └── security.php          # Fungsi pembantu keamanan aplikasi
-├── config/
-│   ├── config.php                # Pengaturan umum aplikasi
-│   └── database.php              # Konfigurasi kredensial database
-├── database/
-│   └── schema.sql                # Skema struktur database MySQL
-├── public/
-│   ├── assets/
-│   │   ├── css/app.css           # Stylesheet utama
-│   │   └── img/logo.png          # Logo organisasi Mapala Arga Dahana
-│   └── index.php                 # Entry point utama aplikasi
-├── resources/
-│   └── views/
-│       ├── auth/login.php        # Tampilan halaman login
-│       ├── errors/404.php        # Tampilan halaman 404 Not Found
-│       └── public/home.php       # Tampilan halaman beranda publik
-└── README.md                     # Dokumentasi proyek
+app/
+  Controllers/
+  Core/
+  Helpers/
+config/
+database/
+public/
+  assets/css/
+resources/views/
+  auth/
+  errors/
+  public/
 ```
 
-## 🚀 Cara Menjalankan Versi Pengembangan (Localhost)
-1. **Clone Repository**
-   ```bash
-   git clone https://github.com
-   ```
-2. **Import Database**
-   - Buka **phpMyAdmin** (`http://localhost/phpmyadmin`).
-   - Buat database baru sesuai pengaturan di `config/database.php`.
-   - Import file `database/schema.sql`.
-3. **Konfigurasi Lingkungan Lokal**
-   Sesuaikan pengaturan koneksi database pada `config/database.php` dan konfigurasi dasar pada `config/config.php`.
-4. **Jalankan di Browser**
-   Akses proyek melalui server lokal Anda di `http://localhost/arga_dahana_starter/public`.
+## Rencana implementasi berikutnya
+1. Selesaikan autentikasi dan middleware role/permission.
+2. Buat layout dashboard admin dan anggota.
+3. Buat CRUD anggota, periode, divisi, jabatan, dan kepengurusan.
+4. Tambahkan kegiatan, peserta, dan presensi.
+5. Tambahkan inventaris, peminjaman, dan mutasi stok.
+6. Tambahkan transaksi keuangan, iuran, surat, rekrutmen, ekspedisi, konten, laporan, dan audit.
+7. Uji akses per role, backup, dan deployment.
 
-## 👨‍💻 Pengembang
-**Faza Chansa Maulana, S.Kom**
-- **Latar Belakang:** S1 Teknik Informatika – Universitas Muria Kudus
-- **Organisasi:** Mapala Arga Dahana UMK
-- **Email:** [fazachansa123@gmail.com](mailto:fazachansa123@gmail.com)
+## Migrasi database
+File `database/schema.sql` merupakan baseline schema awal yang dapat diimpor pada database baru. Untuk perubahan berikutnya, gunakan file SQL migrasi bernomor, misalnya:
+- `database/migrations/001_create_core_tables.sql`
+- `database/migrations/002_add_activity_registration.sql`
+
+Jalankan migrasi secara berurutan dan catat versi yang sudah diterapkan pada tabel `schema_migrations` (tambahkan saat membangun migration runner).
